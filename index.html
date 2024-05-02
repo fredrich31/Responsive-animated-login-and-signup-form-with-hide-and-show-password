@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive animated login and signup form with hide and show password</title>
+    
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"> -->
 
+<script src="https://kit.fontawesome.com/aa7454d09f.js" crossorigin="anonymous"></script>
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" /> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> -->
+
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  -->
+
+<!-- <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"> -->
+
+
+<!-- <script src="https://kit.fontawesome.com/dd9af7210e.js" crossorigin="anonymous"></script> -->
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css "> -->
+
+
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"> -->
+
+<!-- <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"> -->
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <section id="section">
+        <i class="fa-solid fa-moon themeButton" id="themeBtn"></i>
+        <!-- <i class="fa-solid fa-diagram-project "></i> -->
+        <i class="fa-brands fa-js projectIcon" ></i>
+        <div class="overlay" id="overlay"></div>
+        <header>
+            <h1 class="logo">Anywhere app.</h1>
+            <article class="nav-link">Home</article>
+            <article class="nav-link">Join</article>
+        </header>
+        <div class="container">
+            <h1 class="offer">start for free</h1>
+            <h1 class="heading">Create new account</h1>
+            <p class="para"><span class="ask">Already a member?</span><span class="link" id="link">Login</span></p>
+            
+                <form action="#" class="form-container" id="signupForm">
+                    <div class="usernameContainer">
+                        <div class="formGroup">
+                            <i class="fa-solid fa-address-book inputIcon"></i>
+                            <input type="text" class="input firstname" id="firstname">
+                            <label for="firstname" class="placeholder">First Name</label>
+                        </div>
+                        <div class="formGroup">
+                            <i class="fa-solid fa-address-book inputIcon"></i>
+                            <input type="text" class="input firstname" id="lastname">
+                            <label for="lastname" class="placeholder">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="formGroup">
+                        <i class="fa-solid fa-envelope inputIcon"></i>
+                        <input type="email" class="input" id="email">
+                        <label for="email" class="placeholder" value="">Email</label>
+                    </div>
+                    <div class="formGroup">
+                        <i class="fa-solid fa-eye inputIcon" id="showSignupPassword"></i>
+                        <input type="password" class="input" id="signuppassword">
+                        <label for="password" class="placeholder">Password</label>
+                    </div>
+                    <div class="btn-container">
+                        <button class="btn btn1">change method</button>
+                        <button class="btn btn2">create account</button>
+                    </div>
+                </form>
+
+        <form action="#" class="form-container" id="loginForm">
+            <div class="formGroup">
+                <i class="fa-solid fa-envelope inputIcon"></i>
+                <input type="email" class="input" id="email">
+                <label for="email" class="placeholder" value="">Email</label>
+            </div>
+            <div class="formGroup">
+                <i class="fa-solid fa-eye inputIcon" id="showLoginPassword"></i>
+                <input type="password" class="input" id="loginpassword">
+                <label for="password" class="placeholder">Password</label>
+            </div>
+            <div class="btn-container">
+                <button class="btn btn2">Login</button>
+            </div>
+        </form>
+    </div>
+    </section>
+<script>
+
+// Toggle Theme
+const themeBtn = document.getElementById("themeBtn");
+const overlay = document.getElementById("overlay");
+
+themeBtn.onclick = () => {
+document.body.classList.toggle("lightTheme")
+overlay.classList.toggle("lightoverlay")
+}
+
+
+// change placeholder postion
+
+const input = document.querySelectorAll(".input");
+const inputArray = Array.from(input);
+
+for(let index = 0; index < inputArray.length; index++){
+    input[index].onchange = (e) => {
+        const parentElement = input[index].parentElement;
+        const label = parentElement.querySelector(".placeholder");
+        if(e.target.value){
+            label.classList.add("notNull")   
+        }else{
+            label.classList.remove("notNull")
+        }
+    }
+}
+
+// Toggle Form
+const link = document.getElementById("link");
+const heading = document.querySelector(".heading");
+const ask = document.querySelector(".ask");
+const signupForm = document.getElementById("signupForm")
+const loginForm = document.getElementById("loginForm")
+
+
+
+link.onclick = () => {
+    const formType = link.innerText;
+    if(formType === "Login"){
+        link.innerText = "Signup";
+        heading.innerText = "Login to existing account";
+        ask.innerText = "You don't have an account?"
+        signupForm.style.display="none";
+        loginForm.style.display="block";
+        loginForm.style.transition="all 5s ease-in-out";
+
+
+    }else{
+        link.innerHTML = "Login"
+        heading.innerText = "Create new account";
+        ask.innerText = "Already a member?"
+        signupForm.style.display="block";
+        signupForm.style.transition="all 5s ease-in-out";
+        loginForm.style.display="none";
+    }
+}
+
+
+// show password
+const signupPassword = document.getElementById("signuppassword");
+const loginPassword = document.getElementById("loginpassword");
+const showSignupPassword = document.getElementById("showSignupPassword");
+const showLoginPassword = document.getElementById("showLoginPassword");
+
+
+// Toggle signup password visibility
+showSignupPassword.onclick = () => {
+    const attr = signupPassword.getAttribute("type")
+    if(attr === "password"){
+        signupPassword.setAttribute("type","text")
+    }else{
+        signupPassword.setAttribute("type","password")
+    }
+}
+
+// Toggle login password visibility
+showLoginPassword.onclick = () => {
+    const attr = loginPassword.getAttribute("type")
+    if(attr === "password"){
+        loginPassword.setAttribute("type","text")
+    }else{
+        loginPassword.setAttribute("type","password")
+    }
+}
+</script>
+
+</body>
+</html>
